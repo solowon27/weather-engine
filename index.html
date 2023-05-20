@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <h1>Weather engine</h1>
+        <p id="time"></p>
+    </header>
+    <nav class="search">
+        <input type="text" placeholder="Search for a City" id="search">
+        <button id="submit">search</button>
+    </nav>   
+    
+    <div class="container">
+        <div class="weather">
+            <img class="weather-icon" src="./assets/images/rainy.png" alt="weather weather-icon">
+            <p id="condition"></p>          
+            <p id="local-time"></p>
+            <h1 class="city">City</h1>
+            <h2 class="temp">Temp</h2> 
+            <p id="feels-like"></p>    
+            <div class="others">
+                <div class="col">
+                    <img src="./assets/images/humidity.png" alt="humidity" width="100px">
+                    <p class="humidity">Humidity</p>
+                </div>
+                <div class="col">
+                    <img src="./assets/images/windy.png" alt="wind" width="100px">
+                    <p class="wind">wind</p>
+                </div>
+            </div>      
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"></script>
+    <script src="./assets/script.js"></script>
+</body>
+
+</html>
