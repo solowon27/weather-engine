@@ -105,7 +105,7 @@ function forecastDataBase(city) {
                     var listItem = document.createElement("li");
 
                     var forIcon = document.createElement("img");
-                    forIcon.src = "assets/images/sunny.png"; // Replace with the path to your image
+                    forIcon.src = ""; // Replace with the path to your image
                     forIcon.alt = "Weather Icon";
                     listItem.appendChild(forIcon);
 
@@ -137,8 +137,7 @@ function forecastDataBase(city) {
 
                     forecastList.appendChild(listItem);
                     previousDate = forecastDate;
-
-                    
+                   
                 }
             });
            
