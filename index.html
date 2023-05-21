@@ -16,15 +16,25 @@
     </header>
     
     <nav class="search">
-        <input type="text" placeholder="Search for a City" id="search">
-        <button id="submit">search</button>
+        <input type="text" placeholder="Search for location" id="search">
+        <button id="submit" class="btn">search</button>
     </nav>
     <section class="main">
         <div class="container">
+            <div class="sun">
+                <div class="sunrise">
+                    <img src="./assets/images/sunrise.png" alt="sunrise">                    
+                    <p>sun rise</p>
+                    <p id="sun-rise"></p>
+                </div>
+                <div class="sunset">
+                    <img src="./assets/images/sunset.png" alt="sunset">
+                    <p>sun set</p>
+                    <p id="sun-set"></p>
+                </div>
+            </div>
             <div class="weather">
-                <span id="sun-rise"></span>
-                <img class="weather-icon" src="./assets/images/rainy.png" alt="weather weather-icon">
-                <span id="sun-set"></span>
+                <img class="weather-icon" src="./assets/images/rainy.png" alt="weather-icon">
                 <p id="condition"></p>
                 <p id="local-time"></p>
                 <h1 class="city">City</h1>
@@ -58,7 +68,9 @@
             <h2>Search History</h2>
             <ul class="history-list"></ul>
 </div>
-    </section class="main">
+</section>
+
+    <h2 id="forecast-header">5 Day Forecast</h2>
     <div class="forecast-container">
         <div class="forecast-list"></div>
     </div>

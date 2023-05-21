@@ -78,6 +78,7 @@ function forecastDataBase(city) {
             var previousDate = null;
 
             forecastList.innerHTML = "";
+            inputEl.value = "";
 
             forecast.forEach(function (forecastDay) {
                 var forecastDate = forecastDay.dt_txt.split(" ")[0];
@@ -88,18 +89,33 @@ function forecastDataBase(city) {
                 console.log(`Date/Time: ${forecastDate} Temp: ${forecastTemp} Humidity: ${forecastHumidity} Wind: ${forecastWind}`);
                 
                 if (forecastDate !== previousDate) {
+
                     var listItem = document.createElement("li");
 
-                    listItem.textContent = 
-                  ` ${forecastDate} 
-                    ${forecastTemp}  
-                    ${forecastHumidity} 
-                    ${forecastWind}`;
+                    var forDate = document.createElement("span");
+                    forDate.textContent = forecastDate;
+                    listItem.appendChild(forDate);
+
+                    var forTemp = document.createElement("span");
+                    forTemp.textContent = String.fromCharCode(9730); // Example: Unicode character for an icon
+                    forTemp.innerHTML += ` ${forecastTemp}°F  `;
+                    listItem.appendChild(forTemp);
+
+                    var forHumidity = document.createElement("span");
+                    forHumidity.textContent = String.fromCharCode(9732); // Example: Unicode character for an icon
+                    forHumidity.innerHTML += ` ${forecastHumidity}%  `;
+                    listItem.appendChild(forHumidity);
+
+                    var forWind = document.createElement("span");
+                    forWind.textContent = String.fromCharCode(9729); // Example: Unicode character for an icon
+                    forWind.innerHTML += ` ${forecastWind}mph  `;
+                    listItem.appendChild(forWind);
+
 
                     forecastList.appendChild(listItem);
                     previousDate = forecastDate;
 
-                    inputEl.value = "";
+                    
                 }
             });
         })

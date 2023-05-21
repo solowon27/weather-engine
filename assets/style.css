@@ -11,7 +11,6 @@ body {
     background-size: cover;*/
     background-color: #46a2f8;
     font-family: monospace;
-    height: 100vh;
 }
 header {
     border-bottom: 1px solid #eee;
@@ -51,15 +50,14 @@ nav {
         display: flex;
         height: 100%;
         margin: 10px;
+        justify-content: center;
+        align-items: center;   
     }
     .container{
         flex: 3;
         height: 500px;
         max-width: 100%;
         max-height: 100%;
-        /* background-image: url('https://images.unsplash.com/photo-1518803194621-27188ba362c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80');
-        background-repeat: no-repeat;
-        background-size: cover; */
         background-color: rgba(240, 248, 255, 0.208);
         color: fff;
         margin: 0 auto;
@@ -78,8 +76,19 @@ nav {
     }
     .others img {
         width: 30px;
-        margin: 0;     
+        margin: 5px;     
     }
+    .sun {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .sun img{
+        width: 60px;
+    }
+    .sun p {
+        display: relative;
+        color:  white;        
+  }
     .weather-icon {
         width: 150px;
     }
@@ -89,39 +98,35 @@ nav {
         margin: 0;
         text-decoration: underline;
   }
-  .weather span {
-        color:  white;
-        font-size: 14px;
-        font-weight: 300;
-        padding-top: 15px;
-        margin-top: 10px;
-               
+ 
+ .btn:hover {
+        scale: 1.05;
+        background-color: #dfdfdf4d;
   }
   .search-history {
     flex: 1;
     background-color: rgba(240, 248, 255, 0.208);
     color: #ffffff;
     height: 500px;
-    max-height: 100%;
+    max-height: 100%;    
+    max-width: 100%;
     margin-left: 5px;
     border-radius: 10px;
     text-align: center;
+    overflow: scroll;
   }
     .search-history li {
         list-style: circle;
         text-align: left;
         padding: 5px;
-        margin: 0;
+        margin-left: 20px;
         cursor: pointer;
-        overflow: hidden;
     }
     .search-history li:hover {
         background-color: rgba(240, 248, 255, 0.208);
         color: #ffffff;
     }
   .forecast-container {
-    display: relative;
-    top: 0;
     background-color: rgba(240, 248, 255, 0.208);
     color: #ffffff;
     align-items: center;
@@ -140,8 +145,14 @@ nav {
     padding: 10px;
     color: #ffffff;
   }
+#forecast-header {
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    text-align: center;
+    color: #ffffff;
+}
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 558px) {
     .main {
         flex-direction: column;
     }
@@ -149,6 +160,9 @@ nav {
         order: 2;
         flex-direction: column;
         margin: 5px;
+    }
+    .others{
+        flex-direction: column;
     }
     .search-history {
         order: 1;
