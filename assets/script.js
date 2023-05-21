@@ -50,6 +50,8 @@ async function checkWeather(city) {
         weatherIcon.src = "assets/images/thunderstorm.png";
         condition.innerHTML = "Thunderstorm";
     }
+    document.querySelector(".container").style.display = "block";
+    document.getElementById("search-icon").style.display = "none";
     document.querySelector(".error").style.display = "none";
 }
 function searchHistory (city){
@@ -102,12 +104,29 @@ function forecastDataBase(city) {
 
                     var listItem = document.createElement("li");
 
+                    var forIcon = document.createElement("img");
+                    forIcon.src = "assets/images/sunny.png"; // Replace with the path to your image
+                    forIcon.alt = "Weather Icon";
+                    listItem.appendChild(forIcon);
+
+                    if (forecastDay.weather[0].main === "Clouds") {
+                        forIcon.src = "assets/images/cloudy.png";
+                    } else if (forecastDay.weather[0].main === "Rain") {
+                        forIcon.src = "assets/images/rainy.png";
+                    } else if (forecastDay.weather[0].main === "Snow") {
+                        forIcon.src = "assets/images/snowy.png";
+                    } else if (forecastDay.weather[0].main === "Clear") {
+                        forIcon.src = "assets/images/sunny.png";
+                    } else if (forecastDay.weather[0].main === "Thunderstorm") {
+                        forIcon.src = "assets/images/thunderstorm.png";
+                    }
+                    
                     var forDate = document.createElement("span");
                     forDate.textContent = forecastDate;
                     listItem.appendChild(forDate);
 
                     var forTemp = document.createElement("span");
-                    forTemp.textContent = String.fromCharCode(9730); // Example: Unicode character for an icon
+                    forTemp.textContent = String.fromCharCode(176); // Example: Unicode character for an icon
                     forTemp.innerHTML += ` ${forecastTemp}°F  `;
                     listItem.appendChild(forTemp);
 
@@ -115,12 +134,6 @@ function forecastDataBase(city) {
                     forHumidity.textContent = String.fromCharCode(9732); // Example: Unicode character for an icon
                     forHumidity.innerHTML += ` ${forecastHumidity}%  `;
                     listItem.appendChild(forHumidity);
-
-                    var forWind = document.createElement("span");
-                    forWind.textContent = String.fromCharCode(9729); // Example: Unicode character for an icon
-                    forWind.innerHTML += ` ${forecastWind}mph  `;
-                    listItem.appendChild(forWind);
-
 
                     forecastList.appendChild(listItem);
                     previousDate = forecastDate;
@@ -150,8 +163,8 @@ buttonEl.addEventListener("click", function () {
     forecastDataBase(inputEl.value);
     searchHistory(inputEl.value);
 });
-window.addEventListener("load", function () {
-    checkWeather("salt lake city");
-    forecastDataBase("salt lake city");
-}
-);
+// window.addEventListener("load", function () {
+//     checkWeather("salt lake city");
+//     forecastDataBase("salt lake city");
+// }
+// );

@@ -63,7 +63,7 @@ nav {
         margin: 0 auto;
         border-radius: 10px;
         text-align: center;
-        overflow: hidden;
+        display: none;
     }
     
     .others {
@@ -144,10 +144,18 @@ nav {
     text-align: center;
     overflow: scroll;
   }
+    .search-history h2{
+        border-bottom: 1px solid #373737;
+        padding: 10px;
+        color: #373737;
+    }
     .search-history li {
         list-style: circle;
         text-align: left;
+        border: 1px solid #ffffff;
+        border-radius: 10px;
         padding: 5px;
+        margin-top: 5px;
         margin-left: 20px;
         cursor: pointer;
     }
@@ -179,9 +187,15 @@ nav {
     background-color: rgba(240, 248, 255, 0.208);
     color: #ffffff;
   }
+  .forecast-list img {
+    width: 30px;
+  }
 #forecast-header {
     text-align: center;
-    color: #ffffff;
+    border-bottom: 1px solid #373737;
+    padding: 10px;
+    color: #373737;
+    text-decoration: underline;
 }
 footer {
     display: flex;
@@ -218,6 +232,9 @@ footer a:hover {
         min-width: 100%;
         margin: 5px;
     }
+    .left-side img {
+        max-width: 100%;
+    }
     .search-history {
         order: 1;
         margin: 5px;
@@ -225,4 +242,5 @@ footer a:hover {
         max-height: 100px;
         overflow: scroll;
     }
+
   }
