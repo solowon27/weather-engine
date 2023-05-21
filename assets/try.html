@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="time"></p>
+
+<script>
+    var timeEl = document.getElementById("time");
+    API_KEY = '9dd8143e5374426b9450bc5115b7fa3b';
+    var url = 'https://api.ipgeolocation.io/timezone?apiKey=9dd8143e5374426b9450bc5115b7fa3b&tz=America/Los_Angeles';
+
+    fetch(url)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        console.log(data);
+        timeEl.textContent = data.date_time_txt;
+
+        
+    }
+    ,1000);
+</script>
+
+</body>
+</html>

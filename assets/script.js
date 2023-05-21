@@ -76,17 +76,33 @@ function forecastDataBase(city) {
             var forecast = data.list;
             var forecastList = document.querySelector(".forecast-list");
             var previousDate = null;
+            
+
 
             forecastList.innerHTML = "";
             inputEl.value = "";
 
             forecast.forEach(function (forecastDay) {
+                // var forecastDate = forecastDay.dt_txt.split(" ")[0];
+                // var forecastTemp = forecastDay.main.temp;
+                // var forecastHumidity = forecastDay.main.humidity;
+                // var forecastWind = forecastDay.wind.speed;
+
+                var currentDay = new Date().getDate();
+                var weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                 
+                var day = new Date(forecastDay.dt_txt).getDay();
+                var dayName = weekDays[day];
                 var forecastDate = forecastDay.dt_txt.split(" ")[0];
                 var forecastTemp = forecastDay.main.temp;
                 var forecastHumidity = forecastDay.main.humidity;
                 var forecastWind = forecastDay.wind.speed;
 
-                console.log(`Date/Time: ${forecastDate} Temp: ${forecastTemp} Humidity: ${forecastHumidity} Wind: ${forecastWind}`);
+                if (forecastDate === currentDay) {
+                    forecastDate = "Today";
+                } else {
+                    forecastDate = dayName;
+                }
                 
                 if (forecastDate !== previousDate) {
 
@@ -118,6 +134,8 @@ function forecastDataBase(city) {
                     
                 }
             });
+           
+
         })
         .catch(error => {
             console.log('Error:', error);

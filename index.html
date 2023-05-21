@@ -20,6 +20,10 @@
         <button id="submit" class="btn">search</button>
     </nav>
     <section class="main">
+        <div class="left-side">
+            <h2 id="forecast-header">5 Day Forecast</h2>
+            <div class="forecast-list"></div>           
+        </div>
         <div class="container">
             <div class="sun">
                 <div class="sunrise">
@@ -34,9 +38,9 @@
                 </div>
             </div>
             <div class="weather">
+                <span id="local-time"></span>
                 <img class="weather-icon" src="./assets/images/rainy.png" alt="weather-icon">
                 <p id="condition"></p>
-                <p id="local-time"></p>
                 <h1 class="city">City</h1>
                 <h2 class="temp">Temp</h2>
                 <p id="feels-like"></p>
@@ -70,10 +74,6 @@
 </div>
 </section>
 
-    <h2 id="forecast-header">5 Day Forecast</h2>
-    <div class="forecast-container">
-        <div class="forecast-list"></div>
-    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
         integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
