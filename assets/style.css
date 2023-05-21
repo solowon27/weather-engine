@@ -104,7 +104,7 @@ nav {
         background-color: #dfdfdf4d;
   }
   .search-history {
-    flex: 1;
+   
     background-color: rgba(240, 248, 255, 0.208);
     color: #ffffff;
     height: 600px;
@@ -135,7 +135,6 @@ nav {
     margin: 5px;
     border-radius: 10px;
     text-align: center;
-    object-fit: contain;
   }
   .forecast-list li {
     border: 1px solid #ffffff;

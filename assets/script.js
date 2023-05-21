@@ -67,9 +67,6 @@ function searchHistory (city){
 function forecastDataBase(city) {
 
     var url = 'https://api.openweathermap.org/data/2.5/forecast?units=imperial&q=' + city + '&appid=' + apiKey;
-    
-    
-
     fetch(url)
         .then(res => res.json())
         .then(data => {
@@ -83,11 +80,7 @@ function forecastDataBase(city) {
             inputEl.value = "";
 
             forecast.forEach(function (forecastDay) {
-                // var forecastDate = forecastDay.dt_txt.split(" ")[0];
-                // var forecastTemp = forecastDay.main.temp;
-                // var forecastHumidity = forecastDay.main.humidity;
-                // var forecastWind = forecastDay.wind.speed;
-
+                
                 var currentDay = new Date().getDate();
                 var weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
                  
@@ -145,6 +138,12 @@ function forecastDataBase(city) {
 displayTime();
 setInterval(displayTime, 1000);
 
+inputEl.addEventListener("keydown", function(event) { // Listen for the "keydown" event to act as a submit button click
+  if (event.keyCode === 13) {
+    event.preventDefault(); // Prevent the default form submission behavior
+    buttonEl.click(); // Trigger the click event of the submit button
+  }
+});
 buttonEl.addEventListener("click", function () {
     checkWeather(inputEl.value);
     forecastDataBase(inputEl.value);

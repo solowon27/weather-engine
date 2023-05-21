@@ -10,21 +10,19 @@
     <p id="time"></p>
 
 <script>
-    var timeEl = document.getElementById("time");
-    API_KEY = '9dd8143e5374426b9450bc5115b7fa3b';
-    var url = 'https://api.ipgeolocation.io/timezone?apiKey=9dd8143e5374426b9450bc5115b7fa3b&tz=America/Los_Angeles';
-
-    fetch(url)
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(data) {
-        console.log(data);
-        timeEl.textContent = data.date_time_txt;
-
-        
+     function renderSearchHistory() {
+        var history = localStorage.getItem("searchHistory");
+        if (history) {
+            history = JSON.parse(history);
+            var lastSearch = history[history.length - 1];
+            checkWeather(lastSearch);
+            forecastDataBase(lastSearch);
+            history.forEach(function (city) {
+                searchHistory(city);
+            });
+        }
     }
-    ,1000);
+    renderSearchHistory();
 </script>
 
 </body>
