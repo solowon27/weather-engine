@@ -50,6 +50,9 @@ async function checkWeather(city) {
         weatherIcon.src = "assets/images/thunderstorm.png";
         condition.innerHTML = "Thunderstorm";
     }
+    // document.querySelector(".weather-box").style.display = "block";
+    // //document.querySelector(".others").style.display = "block";
+    document.querySelector(".error").style.display = "none";
 }
 function searchHistory (city){
     const searchHistory = document.querySelector('.history-list');

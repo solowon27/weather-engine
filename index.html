@@ -25,18 +25,14 @@
             <div class="forecast-list"></div>           
         </div>
         <div class="container">
-            <div class="sun">
+            <div class="weather-box">
+            <div class="left">
                 <div class="sunrise">
-                    <img src="./assets/images/sunrise.png" alt="sunrise">                    
-                    <p>sun rise</p>
-                    <p id="sun-rise"></p>
+                        <img src="./assets/images/sunrise.png" alt="sunrise">                    
+                        <p>sun rise</p>
+                        <p id="sun-rise"></p>
+                    </div>
                 </div>
-                <div class="sunset">
-                    <img src="./assets/images/sunset.png" alt="sunset">
-                    <p>sun set</p>
-                    <p id="sun-set"></p>
-                </div>
-            </div>
             <div class="weather">
                 <span id="local-time"></span>
                 <img class="weather-icon" src="./assets/images/rainy.png" alt="weather-icon">
@@ -44,6 +40,15 @@
                 <h1 class="city">City</h1>
                 <h2 class="temp">Temp</h2>
                 <p id="feels-like"></p>
+            </div>
+            <div class="right">
+                <div class="sunset">
+                    <img src="./assets/images/sunset.png" alt="sunset">
+                    <p>sun set</p>
+                    <p id="sun-set"></p>
+                </div>
+            </div>
+        </div>
                 <div class="others">
                     <div class="col">
                         <img src="./assets/images/humidity.png" alt="humidity">
@@ -67,7 +72,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     <div class="search-history">
             <h2>Search History</h2>
             <ul class="history-list"></ul>
