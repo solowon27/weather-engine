@@ -183,7 +183,23 @@ nav {
     text-align: center;
     color: #ffffff;
 }
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    border-top: 1px solid #eee;
+    border-radius: 10px;
+    font-family: monospace;
+}
+footer img {
+    width: 30px;
+}
+footer a:hover {
+    cursor: pointer;
+    scale: 1.05;
 
+}
   @media screen and (max-width: 558px) {
     .main {
         flex-direction: column;
