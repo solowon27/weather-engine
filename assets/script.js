@@ -18,9 +18,10 @@ function displayTime() { //function to display the current time and date
 async function checkWeather(city) { //function to check the weather for the city entered by the user 
     const response = await fetch(weatherApiUrl + city + `&appid=${apiKey}`); //fetches the weather data from the API using the async/await method
     const data = await response.json();
-    // console.log(data);
+    console.log(data);
     if (data.cod === "404") { //if the city entered by the user is not found, an error message is displayed
         document.getElementById("error-msg").style.display = "block";
+        searchHistory.empty = ""; //the search history is cleared
     }
 
     //on the following lines(27-34), the weather data is displayed on the page using the DOM method
@@ -97,10 +98,11 @@ function forecastDataBase(city) {
               'Saturday'
             ];
   
-            var forecastDate = forecastDay.dt_txt.split(' ')[0]; //this [0] is for the date and [1] is for the time but we only need the date for this project
-            var forecastTemp = forecastDay.main.temp; //gets the temperature for the forecast day and stores it in the variable forecastTemp
-            var forecastHumidity = forecastDay.main.humidity; //gets the humidity for the forecast day and stores it in the variable forecastHumidity
-  
+            var forecastDate = forecastDay.dt_txt.split(' ')[0]; //this [0] is for the date and [1] is for the time but we only need the date for this project           
+            var forecastMaxTemp = forecastDay.main.temp_max; //gets the maximum temperature for the forecast day and stores it in the variable forecastMaxTemp
+            var forecastMinTemp = forecastDay.main.temp_min; //gets the minimum temperature for the forecast day and stores it in the variable forecastMinTemp
+           console.log(forecastDay.main.temp_max);
+            
             if (forecastDate !== previousDate) { //if the forecast date is not equal to the previous date, the forecast data is displayed this is to avoid displaying the same data for the next 5 days
               var listItem = document.createElement('li');
               var forIcon = document.createElement('img');
@@ -131,13 +133,13 @@ function forecastDataBase(city) {
               }
               listItem.appendChild(forDate);
   
-              var forTemp = document.createElement('span');
-              forTemp.textContent = String.fromCharCode(176) + ' ' + forecastTemp + '°F';
-              listItem.appendChild(forTemp);
+              var forMinTemp = document.createElement('span');
+              forMinTemp.textContent = String.fromCharCode(176) + 'min ' + forecastMinTemp + '°F';
+              listItem.appendChild(forMinTemp);
   
-              var forHumidity = document.createElement('span');
-              forHumidity.textContent = String.fromCharCode(9732) + ' ' + forecastHumidity + '%';
-              listItem.appendChild(forHumidity);
+              var forMaxTemp = document.createElement('span');
+              forMaxTemp.textContent = String.fromCharCode(176) + 'max ' + forecastMaxTemp + '°F';
+              listItem.appendChild(forMaxTemp);
   
               forecastList.appendChild(listItem);
               previousDate = forecastDate; 
