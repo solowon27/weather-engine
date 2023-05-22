@@ -189,6 +189,7 @@ nav {
     list-style: none;
     padding: 10px;
     color: #ffffff;
+    cursor: pointer;
   }
   .forecast-list li:hover {
     background-color: rgba(240, 248, 255, 0.208);
