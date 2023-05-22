@@ -1,6 +1,6 @@
 const apiKey = "f65b5dad37dd2e590d76b26428ca41ae";
 const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather?units=imperial&q=";
-const timeApiUrl = "https://worldtimeapi.org/api/ip";
+// const timeApiUrl = "https://worldtimeapi.org/api/ip";
 
 const weatherIcon = document.querySelector(".weather-icon");
 const inputEl = document.querySelector(".search input");
@@ -8,10 +8,6 @@ const buttonEl = document.querySelector(".search button");
 var condition = document.getElementById("condition");
 var feelsLike = document.getElementById("feels-like");
 var timeDisplayEl = document.getElementById("time");
-
-
-
-
 
 function displayTime() {
     var rightNow = dayjs().format('MMM DD, YYYY [at] hh:mm:ss a');
@@ -21,8 +17,10 @@ function displayTime() {
 async function checkWeather(city) {
     const response = await fetch(weatherApiUrl + city + `&appid=${apiKey}`);
     const data = await response.json();
-    console.log(data);
-
+    // console.log(data);
+    if (data.cod === "404") {
+        document.getElementById("error-msg").style.display = "block";
+    }
 
     document.querySelector(".city").innerHTML = data.name;
     document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°F";
@@ -52,7 +50,8 @@ async function checkWeather(city) {
     }
     document.querySelector(".container").style.display = "block";
     document.getElementById("search-icon").style.display = "none";
-    document.querySelector(".error").style.display = "none";
+    document.getElementById("error-msg").style.display = "none";
+    document.getElementById("forecast-header").style.display = "block";
 }
 function searchHistory (city){
     const searchHistory = document.querySelector('.history-list');
@@ -69,15 +68,13 @@ function searchHistory (city){
 }
 function forecastDataBase(city) {
 
-    var url = 'https://api.openweathermap.org/data/2.5/forecast?units=imperial&q=' + city + '&appid=' + apiKey;
+    var url = 'https://api.openweathermap.org/data/2.5/forecast?cnt=35&units=imperial&q=' + city + '&appid=' + apiKey;
     fetch(url)
         .then(res => res.json())
         .then(data => {
             var forecast = data.list;
             var forecastList = document.querySelector(".forecast-list");
             var previousDate = null;
-            
-
 
             forecastList.innerHTML = "";
             inputEl.value = "";
@@ -86,13 +83,12 @@ function forecastDataBase(city) {
                 
                 var currentDay = new Date().getDate();
                 var weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                 
+                              
                 var day = new Date(forecastDay.dt_txt).getDay();
                 var dayName = weekDays[day];
                 var forecastDate = forecastDay.dt_txt.split(" ")[0];
                 var forecastTemp = forecastDay.main.temp;
                 var forecastHumidity = forecastDay.main.humidity;
-                var forecastWind = forecastDay.wind.speed;
 
                 if (forecastDate === currentDay) {
                     forecastDate = "Today";
