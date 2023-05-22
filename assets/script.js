@@ -21,8 +21,7 @@ async function checkWeather(city) { //function to check the weather for the city
     console.log(data);
     if (data.cod === "404") { //if the city entered by the user is not found, an error message is displayed
         document.getElementById("error-msg").style.display = "block";
-        searchHistory.empty = ""; //the search history is cleared
-    }
+      }
 
     //on the following lines(27-34), the weather data is displayed on the page using the DOM method
     document.querySelector(".city").innerHTML = data.name;
@@ -68,6 +67,8 @@ function searchHistory (city){
         historyList.addEventListener("click", function () { //when the user clicks on the city name in the search history, the weather data for that city is displayed from local storage
         checkWeather(historyList.textContent); //the weather data is displayed for the city name that is clicked on
         forecastDataBase(historyList.textContent);//the forecast data is displayed for the city name that is clicked on
+        document.querySelector(".forecast-box").style.display = "none"; 
+        document.querySelector(".container").style.display = "block";
     }
     )
 }
@@ -101,7 +102,7 @@ function forecastDataBase(city) {
             var forecastDate = forecastDay.dt_txt.split(' ')[0]; //this [0] is for the date and [1] is for the time but we only need the date for this project           
             var forecastMaxTemp = forecastDay.main.temp_max; //gets the maximum temperature for the forecast day and stores it in the variable forecastMaxTemp
             var forecastMinTemp = forecastDay.main.temp_min; //gets the minimum temperature for the forecast day and stores it in the variable forecastMinTemp
-           console.log(forecastDay.main.temp_max);
+             //console.log(forecastDay.main.temp_max);
             
             if (forecastDate !== previousDate) { //if the forecast date is not equal to the previous date, the forecast data is displayed this is to avoid displaying the same data for the next 5 days
               var listItem = document.createElement('li');
@@ -134,15 +135,21 @@ function forecastDataBase(city) {
               listItem.appendChild(forDate);
   
               var forMinTemp = document.createElement('span');
-              forMinTemp.textContent = String.fromCharCode(176) + 'min ' + forecastMinTemp + '°F';
+              forMinTemp.textContent = String.fromCharCode(176) + 'min ' + forecastMinTemp + '°F'; //the minimum temperature for the forecast day is displayed
               listItem.appendChild(forMinTemp);
   
               var forMaxTemp = document.createElement('span');
-              forMaxTemp.textContent = String.fromCharCode(176) + 'max ' + forecastMaxTemp + '°F';
+              forMaxTemp.textContent = String.fromCharCode(176) + 'max ' + forecastMaxTemp + '°F'; //the maximum temperature for the forecast day is displayed
               listItem.appendChild(forMaxTemp);
   
               forecastList.appendChild(listItem);
               previousDate = forecastDate; 
+
+              listItem.addEventListener('click', function() {
+                eachForecastData(forecastDay);
+                document.querySelector('.container').style.display = 'none';
+                document.querySelector('.forecast-box').style.display = 'block';
+              });
             }
           });
         } else {
@@ -153,18 +160,64 @@ function forecastDataBase(city) {
         console.log('Error:', error);
       });
   }
-  
+  //the following function is for displaying the forecast data for each day when the user clicks on the forecasted day data
+  function eachForecastData(forecastData) {
+    var targetDate = forecastData.dt_txt.split(' ')[0];
+    var maxTemp = forecastData.main.temp_max;
+    var minTemp = forecastData.main.temp_min;
+    var humidity = forecastData.main.humidity;
+    var windSpeed = forecastData.wind.speed;
+    var weatherCondition = forecastData.weather[0].main;
+    
+
+    var forecastDataEl = document.querySelector('.forecast-data');
+    forecastDataEl.innerHTML = '';
+
+    var forecastDataTitle = document.createElement('h2');
+    forecastDataTitle.textContent = 'Forecast Data';
+    forecastDataEl.appendChild(forecastDataTitle);
+
+    var forecastDataList = document.createElement('ul');
+    forecastDataList.classList.add('forecast-data-list');
+    forecastDataEl.appendChild(forecastDataList);
+
+    var forecastDataListItem1 = document.createElement('li');
+    forecastDataListItem1.textContent = 'Date: ' + targetDate;
+    forecastDataList.appendChild(forecastDataListItem1);
+
+    var forecastDataListItem2 = document.createElement('li');
+    forecastDataListItem2.textContent = 'Max Temp: ' + maxTemp + String.fromCharCode(176) + 'F';
+    forecastDataList.appendChild(forecastDataListItem2);
+
+    var forecastDataListItem3 = document.createElement('li');
+    forecastDataListItem3.textContent = 'Min Temp: ' + minTemp + String.fromCharCode(176) + 'F';
+    forecastDataList.appendChild(forecastDataListItem3);
+
+    var forecastDataListItem4 = document.createElement('li');
+    forecastDataListItem4.textContent = 'Humidity: ' + humidity + '%';
+    forecastDataList.appendChild(forecastDataListItem4);
+
+    var forecastDataListItem5 = document.createElement('li');
+    forecastDataListItem5.textContent = 'Wind Speed: ' + windSpeed + 'mph';
+    forecastDataList.appendChild(forecastDataListItem5);
+
+    var forecastDataListItem6 = document.createElement('li');
+    forecastDataListItem6.textContent = 'Weather Condition: ' + weatherCondition;
+    forecastDataList.appendChild(forecastDataListItem6);
+
+    console.log(forecastData);
+  }
 
 displayTime();
 setInterval(displayTime, 1000);
 
 inputEl.addEventListener("keydown", function(event) { // Listen for the "keydown" event to act as a submit button click
-  if (event.keyCode === 13) {
+  if (event.keyCode === 13) { //number 13 is the "Enter" key on the keyboard
     event.preventDefault(); // Prevent the default form submission behavior
     buttonEl.click(); // Trigger the click event of the submit button
   }
 });
-buttonEl.addEventListener("click", function () {
+buttonEl.addEventListener("click", function () { //when the user clicks on the search button, the weather data is displayed
     checkWeather(inputEl.value);
     forecastDataBase(inputEl.value);
     searchHistory(inputEl.value);

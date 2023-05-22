@@ -50,6 +50,11 @@ nav {
         justify-content: center;
         align-items: center;   
     }
+    aside {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     .container{
         flex: 3;
         height: 100vh;
@@ -61,7 +66,6 @@ nav {
         text-align: center;
         display: none;
     }
-    
     .others {
         display: flex;
         flex-wrap: wrap;
@@ -202,6 +206,34 @@ nav {
     text-decoration: underline;
     display: none;
 }
+.forecast-box {
+    flex: 2;
+    display: none;
+
+}
+.forecast-data {
+    flex: 3;
+    min-height: 100vh;
+    background-color: rgba(240, 248, 255, 0.208);
+    color: fff;
+    margin: 0 auto;
+    border-radius: 10px;
+    text-align: center;
+}
+.forecast-data li {
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    list-style: none;
+    margin: 10px;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.forecast-data img {
+    width: 150px;
+    display: relative;
+}
 footer {
     display: flex;
     justify-content: center;
@@ -218,6 +250,7 @@ footer a:hover {
     cursor: pointer;
     scale: 1.05;
 
+    
 }
   @media screen and (max-width: 558px) { /*adding media query for mobile devices*/
     .main {
@@ -256,5 +289,9 @@ footer a:hover {
         max-height: 100px;
         overflow: scroll; /*adding scroll bar to the search history*/
     }
-
+    .forecast-box {
+        order: 4;
+        min-width: 100%;
+        margin: 5px;
+    }
   }
