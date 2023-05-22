@@ -72,84 +72,86 @@ function searchHistory (city){
 }
 //the following function is for the 5 days forecast display and from line 87-140 i get some help from chatGPT
 function forecastDataBase(city) {
-
-    var url = 'https://api.openweathermap.org/data/2.5/forecast?cnt=35&units=imperial&q=' + city + '&appid=' + apiKey; //API URL for OpenWeatherMap for the 5 days forecast data 'i use cnt=35 to get the forecast for 5 days'
-    fetch(url) //fetches the forecast data from the API using the .then method and the arrow function which is my preferred method
-        .then(res => res.json())
-        .then(data => {
-            var forecast = data.list; //the forecast data is stored in the variable forecast
-            var forecastList = document.querySelector(".forecast-list"); //selects the unordered list element from the HTML
-            var previousDate = null; //the previous date is set to null
-
-            forecastList.innerHTML = ""; //the unordered list is cleared after the user enters a new city name
-            inputEl.value = ""; //the input field is cleared after the user enters a new city name
-
-            forecast.forEach(function (forecastDay) { //this forEach loop is to loop through the forecast data 
-                
-                var currentDay = new Date().getDate(); //gets the current date from the system
-                var weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]; //array of the days of the week
-                              
-                var day = new Date(forecastDay.dt_txt).getDay(); //gets the day of the week from the forecast data
-                var dayName = weekDays[day];    
-                var forecastDate = forecastDay.dt_txt.split(" ")[0];
-                var forecastTemp = forecastDay.main.temp;
-                var forecastHumidity = forecastDay.main.humidity;
-
-                if (forecastDate === currentDay) { //if the forecast date is equal to the current date, then it is displayed as "Today" otherwise the day of the week is displayed
-                    forecastDate = "Today";
-                } else {
-                    forecastDate = dayName;
-                }
-                
-                if (forecastDate !== previousDate) { // if the forecast date is not equal to the previous date, then the following code is executed
-
-                    var listItem = document.createElement("li"); //creates a list item element for the forecast data
-
-                    var forIcon = document.createElement("img"); //creates an image element for the forecast data
-                    forIcon.src = ""; //replace the icons related with the data from the API
-                    forIcon.alt = "Weather Icon";
-                    listItem.appendChild(forIcon);
-
-                    //the following if statements are to display the weather icon based on the weather condition
-                    if (forecastDay.weather[0].main === "Clouds") {
-                        forIcon.src = "assets/images/cloudy.png";
-                    } else if (forecastDay.weather[0].main === "Rain") {
-                        forIcon.src = "assets/images/rainy.png";
-                    } else if (forecastDay.weather[0].main === "Snow") {
-                        forIcon.src = "assets/images/snowy.png";
-                    } else if (forecastDay.weather[0].main === "Clear") {
-                        forIcon.src = "assets/images/sunny.png";
-                    } else if (forecastDay.weather[0].main === "Thunderstorm") {
-                        forIcon.src = "assets/images/thunderstorm.png";
-                    }
-                    
-                    var forDate = document.createElement("span"); //creates a span element for the forecast data
-                    forDate.textContent = forecastDate; //and set the text content of the span element to the forecast date
-                    listItem.appendChild(forDate);
-
-                    var forTemp = document.createElement("span");
-                    forTemp.textContent = String.fromCharCode(176); //Unicode character for an icon
-                    forTemp.innerHTML += ` ${forecastTemp}°F  `;
-                    listItem.appendChild(forTemp);
-
-                    var forHumidity = document.createElement("span");
-                    forHumidity.textContent = String.fromCharCode(9732); 
-                    forHumidity.innerHTML += ` ${forecastHumidity}%  `;
-                    listItem.appendChild(forHumidity);
-
-                    forecastList.appendChild(listItem);
-                    previousDate = forecastDate; //then the previous date is set to the forecast date so that the forecast data is not repeated
-                   
-                }
-            });
-           
-
-        })
-        .catch(error => {
-            console.log('Error:', error);
-            window.alert("Please enter a valid city name"); //if the user enters an invalid city name, then an error message is displayed
-        });
-}
+    var url = 'https://api.openweathermap.org/data/2.5/forecast?units=imperial&q=' + city + '&appid=' + apiKey;
+  
+    fetch(url) //fetches the forecast data from the API using a .then method and arrow function my preferred method 
+      .then(res => res.json()) //converts the data into JSON format
+      .then(data => {
+        var forecast = data.list; //now the forecast data is stored in the variable forecast
+        var forecastList = document.querySelector('.forecast-list'); //selects the unordered list element from the HTML
+        var previousDate = null; //here we are setting the previous date to null so our data will be start from the current date
+  
+        forecastList.innerHTML = ''; //clears the forecast list element after each search
+        inputEl.value = ''; //clears the input field after each search
+  
+        if (data.cod === '200') { //if the city entered by the user is found, the forecast data is displayed
+          forecast.forEach(function(forecastDay) {
+            var currentDay = new Date().getDate(); //gets the current date from the system and stores it in the variable currentDay
+            var weekDays = [
+              'Sunday',
+              'Monday',
+              'Tuesday',
+              'Wednesday',
+              'Thursday',
+              'Friday',
+              'Saturday'
+            ];
+  
+            var forecastDate = forecastDay.dt_txt.split(' ')[0]; //this [0] is for the date and [1] is for the time but we only need the date for this project
+            var forecastTemp = forecastDay.main.temp; //gets the temperature for the forecast day and stores it in the variable forecastTemp
+            var forecastHumidity = forecastDay.main.humidity; //gets the humidity for the forecast day and stores it in the variable forecastHumidity
+  
+            if (forecastDate !== previousDate) { //if the forecast date is not equal to the previous date, the forecast data is displayed this is to avoid displaying the same data for the next 5 days
+              var listItem = document.createElement('li');
+              var forIcon = document.createElement('img');
+              forIcon.alt = 'Weather Icon';
+  
+              //the following if statements are for displaying the weather icon based on the weather condition
+              if (forecastDay.weather[0].main === 'Clouds') {
+                forIcon.src = 'assets/images/cloudy.png';
+              } else if (forecastDay.weather[0].main === 'Rain') {
+                forIcon.src = 'assets/images/rainy.png';
+              } else if (forecastDay.weather[0].main === 'Snow') {
+                forIcon.src = 'assets/images/snowy.png';
+              } else if (forecastDay.weather[0].main === 'Clear') {
+                forIcon.src = 'assets/images/sunny.png';
+              } else if (forecastDay.weather[0].main === 'Thunderstorm') {
+                forIcon.src = 'assets/images/thunderstorm.png';
+              }
+  
+              listItem.appendChild(forIcon); //then the weather icon is appended to the list item
+  
+              var forDate = document.createElement('span'); //creates a span element for the forecast date
+              var forecastDateObj = new Date(forecastDay.dt_txt); //gets the forecast date from the system and stores it in the variable forecastDateObj
+              if (forecastDateObj.getDate() === currentDay) { //if the forecast date is equal to the current date, the text content of the span element is set to 'Today'
+                forDate.textContent = 'Today'; 
+              } else {
+                var dayName = weekDays[forecastDateObj.getDay()]; //else the text content of the span element is set to the day name according to the forecast date
+                forDate.textContent = dayName;
+              }
+              listItem.appendChild(forDate);
+  
+              var forTemp = document.createElement('span');
+              forTemp.textContent = String.fromCharCode(176) + ' ' + forecastTemp + '°F';
+              listItem.appendChild(forTemp);
+  
+              var forHumidity = document.createElement('span');
+              forHumidity.textContent = String.fromCharCode(9732) + ' ' + forecastHumidity + '%';
+              listItem.appendChild(forHumidity);
+  
+              forecastList.appendChild(listItem);
+              previousDate = forecastDate; 
+            }
+          });
+        } else {
+          window.alert('Error: Invalid response from the API');
+        }
+      })
+      .catch(error => {
+        console.log('Error:', error);
+      });
+  }
+  
 
 displayTime();
 setInterval(displayTime, 1000);
