@@ -52,7 +52,7 @@ nav {
     }
     .container{
         flex: 3;
-        height: 600px;
+        height: 100vh;
         max-width: 100%;
         max-height: 100%;
         background-color: rgba(240, 248, 255, 0.208);
@@ -72,8 +72,11 @@ nav {
         margin-bottom: 10px;
     }
     .others img {
-        width: 70px;
+        width: 100px;
         margin: 5px;     
+    }
+    .others  p {
+        text-decoration: underline;
     }
     .others span{
         color: #ffffff;
@@ -81,15 +84,14 @@ nav {
     }
   .weather-box{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     margin: 10px;
   }
   .left {
     flex:1;
-    align-self: flex-start;
-
-  }
+    align-self: flex-start; 
+}
   .right {
     flex:1;
     align-self: flex-start;
@@ -134,7 +136,7 @@ nav {
   .search-history {   
     background-color: rgba(240, 248, 255, 0.208);
     color: #ffffff;
-    height: 600px;
+    height: 100vh;
     max-width: 100%;
     margin-left: 5px;
     border-radius: 10px;
@@ -164,7 +166,7 @@ nav {
     flex: 1;
     background-color: rgba(240, 248, 255, 0.208);
     color: #ffffff;
-    height: 600px;
+    height: 100vh;
     max-height: 100%;    
     max-width: 100%;
     margin: 5px;
@@ -226,13 +228,18 @@ footer a:hover {
         order: 2;
         flex-direction: column;
         min-width: 100%;
-        margin: 5px;
+        margin: 0 auto;
+        padding: 0;
     }
     .weather-box {
         min-width: 100%;
     }
-    .others{
+    .others {
         flex-direction: column;
+    }
+    .others img{
+        width: 50px;
+        height: auto;
     }
     .left-side {
         order: 3;
