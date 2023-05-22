@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" href="./assets/style.css">
     <title>weather engine</title>
 </head>
@@ -20,13 +19,13 @@
         <button id="submit" class="btn">search</button>
     </nav>
     <section class="main">
-        <div class="left-side">
+        <div class="left-side"> <!-- line #23-28 left side of the page where the 5 day forecast is displayed -->
             <h2 id="forecast-header">5 Day Forecast</h2>
             <div class="forecast-list"></div>   
             <h2 id="error-msg">please enter a correct city name</h2>
             <img id="search-icon" src="./assets/images/search.png" alt="search">       
         </div>
-        <div class="container">
+        <div class="container"> <!-- line #29-76, main page where the current weather is displayed -->
             <div class="weather-box">
             <div class="left">
                 <div class="sunrise">
@@ -74,7 +73,7 @@
                     </div>
                 </div>
             </div>
-    <div class="search-history">
+    <div class="search-history"> <!-- line #77-80, search history section -->
             <h2>Search History</h2>
             <ul class="history-list"></ul>
 </div>
@@ -84,10 +83,11 @@
         <p>Weather Engine by Solomon Tegegne &copy; May 2023</p>  
         <a href = "#home"><img src="./assets/images/back.png" alt="backhome"></a>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
-    <script src="./assets/script.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- jquery cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js" 
+        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script> <!-- dayjs script -->
+    <script src="./assets/script.js"></script> <!--main script -->
 </body>
 
 </html>
