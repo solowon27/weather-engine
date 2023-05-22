@@ -20,6 +20,7 @@ async function checkWeather(city) {
     // console.log(data);
     if (data.cod === "404") {
         document.getElementById("error-msg").style.display = "block";
+        data.querySelector(".container").style.display = "none";
     }
 
     document.querySelector(".city").innerHTML = data.name;

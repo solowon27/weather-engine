@@ -114,7 +114,7 @@ nav {
             font-weight: 600;
             margin: 0;
     }
- .weather h1, h2 {
+ .weather h1, h2, p {
     color: white;
  }
 .sunset img{
