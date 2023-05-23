@@ -21,7 +21,7 @@ async function checkWeather(city) { //function to check the weather for the city
     console.log(data);
     if (data.cod === "404") { //if the city entered by the user is not found, an error message is displayed
         document.getElementById("error-msg").style.display = "block";
-      }
+    }
 
     //on the following lines(27-34), the weather data is displayed on the page using the DOM method
     document.querySelector(".city").innerHTML = data.name;
@@ -69,12 +69,13 @@ function searchHistory (city){
         forecastDataBase(historyList.textContent);//the forecast data is displayed for the city name that is clicked on
         document.querySelector(".forecast-box").style.display = "none"; 
         document.querySelector(".container").style.display = "block";
+        document.querySelector(".forecast-box").style.display = "none";
     }
     )
 }
 //the following function is for the 5 days forecast display and from line 87-140 i get some help from chatGPT
 function forecastDataBase(city) {
-    var url = 'https://api.openweathermap.org/data/2.5/forecast?units=imperial&q=' + city + '&appid=' + apiKey;
+    var url = 'https://api.openweathermap.org/data/2.5/forecast?cnt=35&units=imperial&q=' + city + '&appid=' + apiKey;
   
     fetch(url) //fetches the forecast data from the API using a .then method and arrow function my preferred method 
       .then(res => res.json()) //converts the data into JSON format
