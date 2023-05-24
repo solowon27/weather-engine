@@ -44,7 +44,8 @@ const apiKey = "your-api-key";
 
 ** The weather icons used in this application are from Iconfinder.
 ** The date and time display functionality is powered by the dayjs library.
-** some of the code was provided by copilot
+** The weather data is obtained from the OpenWeatherMap API.
+** some of the code was provided by the help of copilot //like this thing
 
 ## License
 This project is not licensed under any.

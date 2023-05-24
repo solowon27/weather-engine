@@ -109,7 +109,7 @@ function forecastDataBase(city) {
   
             var forecastDate = forecastDay.dt_txt.split(' ')[0]; //this [0] is for the date and [1] is for the time but we only need the date for this project           
             var forecastMaxTemp = forecastDay.main.temp_max; //gets the maximum temperature for the forecast day and stores it in the variable forecastMaxTemp
-            var forecastMinTemp = forecastDay.main.temp_min; //gets the minimum temperature for the forecast day and stores it in the variable forecastMinTemp
+            var forecastMinTemp = forecastDay.main.temp_min; 
              //console.log(forecastDay.main.temp_max);
             
             if (forecastDate !== previousDate) { //if the forecast date is not equal to the previous date, the forecast data is displayed this is to avoid displaying the same data for the next 5 days
