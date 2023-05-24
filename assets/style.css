@@ -296,3 +296,11 @@ footer a:hover {
         margin: 5px;
     }
   }
+  .return-btn {
+    width: 50%;
+    background-color: rgba(240, 248, 255, 0.208);
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    margin-top: 30px;
+  }

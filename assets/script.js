@@ -206,6 +206,15 @@ function forecastDataBase(city) {
     forecastDataListItem6.textContent = 'Weather Condition: ' + weatherCondition;
     forecastDataList.appendChild(forecastDataListItem6);
 
+    var forecastDataListItem7 = document.createElement('button');
+    forecastDataListItem7.classList.add('return-btn');
+    forecastDataListItem7.textContent = 'return';
+    forecastDataList.appendChild(forecastDataListItem7);
+    forecastDataListItem7.addEventListener('click', function() {
+      document.querySelector('.container').style.display = 'block';
+      document.querySelector('.forecast-box').style.display = 'none';
+    });
+
     console.log(forecastData);
   }
 
