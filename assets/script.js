@@ -57,6 +57,7 @@ async function checkWeather(city) { //function to check the weather for the city
     document.getElementById("search-icon").style.display = "none"; // the big search icon becomes hidden after the user enters a valid city name
     document.getElementById("error-msg").style.display = "none"; //the error message is hidden after the user enters a valid city name
     document.getElementById("forecast-header").style.display = "block"; //the forecast header is displayed after the user enters a valid city name
+    document.querySelector(".search-history").style.display = "block"; 
 }
 //the following function is for the search history display
 function searchHistory (city){
@@ -216,6 +217,7 @@ function forecastDataBase(city) {
     forecastDataListItem7.classList.add('return-btn');
     forecastDataListItem7.textContent = 'return';
     forecastDataList.appendChild(forecastDataListItem7);
+    
     forecastDataListItem7.addEventListener('click', function() {
       document.querySelector('.container').style.display = 'block';
       document.querySelector('.forecast-box').style.display = 'none';
