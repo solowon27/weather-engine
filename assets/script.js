@@ -10,6 +10,8 @@ var condition = document.getElementById("condition");
 var feelsLike = document.getElementById("feels-like");
 var timeDisplayEl = document.getElementById("time");
 
+var clearbtn= document.querySelector(".clear-history");
+
 function displayTime() { //function to display the current time and date
     var rightNow = dayjs().format('MMM DD, YYYY [at] hh:mm:ss a');
     timeDisplayEl.textContent = rightNow;
@@ -67,11 +69,15 @@ function searchHistory (city){
         historyList.addEventListener("click", function () { //when the user clicks on the city name in the search history, the weather data for that city is displayed from local storage
         checkWeather(historyList.textContent); //the weather data is displayed for the city name that is clicked on
         forecastDataBase(historyList.textContent);//the forecast data is displayed for the city name that is clicked on
+       
         document.querySelector(".forecast-box").style.display = "none"; 
         document.querySelector(".container").style.display = "block";
-        document.querySelector(".forecast-box").style.display = "none";
     }
     )
+    clearbtn.addEventListener("click", function () { //when the user clicks on the clear history button, the search history is cleared
+        searchHistory.innerHTML = "";
+        localStorage.clear();
+    })
 }
 //the following function is for the 5 days forecast display and from line 87-140 i get some help from chatGPT
 function forecastDataBase(city) {
