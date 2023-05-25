@@ -25,8 +25,10 @@ async function checkWeather(city) { //function to check the weather for the city
         document.getElementById("error-msg").style.display = "block";
     }
 
+
     //on the following lines(27-34), the weather data is displayed on the page using the DOM method
     document.querySelector(".city").innerHTML = data.name;
+    document.getElementById("local-time").innerHTML = dayjs().format('MMM DD, YYYY');
     document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°F";
     document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
     document.querySelector(".wind").innerHTML = data.wind.speed + "mph";
@@ -56,30 +58,42 @@ async function checkWeather(city) { //function to check the weather for the city
     document.querySelector(".container").style.display = "block"; //so that the weather data is displayed only after the user enters a valid city name
     document.getElementById("search-icon").style.display = "none"; // the big search icon becomes hidden after the user enters a valid city name
     document.getElementById("error-msg").style.display = "none"; //the error message is hidden after the user enters a valid city name
-    document.getElementById("forecast-header").style.display = "block"; //the forecast header is displayed after the user enters a valid city name
+    document.getElementById("forecast-header").style.display = "block";
+    document.querySelector(".instruction").style.display = "block"; //the forecast header is displayed after the user enters a valid city name
     document.querySelector(".search-history").style.display = "block"; 
 }
 //the following function is for the search history display
-function searchHistory (city){
-    const searchHistory = document.querySelector('.history-list'); //selects the unordered list element from the HTML
-   
-    var historyList = document.createElement("li"); //creates a list item element
-        historyList.textContent = city; //the text content of the list item is the city name entered by the user
-        searchHistory.appendChild(historyList);
+function searchHistory(city) {
+  const searchHistory = document.querySelector('.history-list');
+  let cities = JSON.parse(localStorage.getItem('cities')) || []; // Retrieve the array of cities from local storage or initialize it as an empty array
 
-        historyList.addEventListener("click", function () { //when the user clicks on the city name in the search history, the weather data for that city is displayed from local storage
-        checkWeather(historyList.textContent); //the weather data is displayed for the city name that is clicked on
-        forecastDataBase(historyList.textContent);//the forecast data is displayed for the city name that is clicked on
-       
-        document.querySelector(".forecast-box").style.display = "none"; 
-        document.querySelector(".container").style.display = "block";
-    }
-    )
-    clearbtn.addEventListener("click", function () { //when the user clicks on the clear history button, the search history is cleared
-        searchHistory.innerHTML = "";
-        localStorage.clear();
-    })
+  cities.push(city); // Add the new city to the array evrytime the user searches for a city
+  localStorage.setItem('cities', JSON.stringify(cities)); // Store the updated array in local storage
+
+  // Clear the existing search history before appending the updated list
+  searchHistory.innerHTML = '';
+
+  cities.forEach((storedCity) => { // Loop through the array of cities and create a list item for each one
+    var storedCityItem = document.createElement("li");
+    storedCityItem.textContent = storedCity;
+    searchHistory.appendChild(storedCityItem);
+
+    storedCityItem.addEventListener("click", function() { // Add an event listener to each list item that will display the weather for that city when clicked
+      checkWeather(storedCityItem.textContent);
+      forecastDataBase(storedCityItem.textContent);
+      document.querySelector(".forecast-box").style.display = "none";
+      document.querySelector(".container").style.display = "block";
+    });
+  });
+
+  clearbtn.addEventListener("click", function() {
+    searchHistory.innerHTML = "";
+    localStorage.removeItem('cities'); // Remove the entire array from local storage
+  });
 }
+
+
+
 //the following function is for the 5 days forecast display and from line 87-140 i get some help from chatGPT
 function forecastDataBase(city) {
     var url = 'https://api.openweathermap.org/data/2.5/forecast?cnt=35&units=imperial&q=' + city + '&appid=' + apiKey;

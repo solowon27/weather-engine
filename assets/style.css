@@ -132,6 +132,16 @@ nav {
     color: #ffffff;
     font-size: 16px;     
 }
+#local-time {
+    color: #ffffff;
+    font-size: 32px;
+}
+.instruction {
+    color: #0a06d3;
+    font-size: 16px;
+    display: none;
+    border-bottom: 1px solid #ffffff;
+}
  .btn:hover {
         scale: 1.05;
         background-color: #dfdfdf4d;
@@ -202,7 +212,6 @@ nav {
   }
 #forecast-header {
     text-align: center;
-    border-bottom: 1px solid #373737;
     padding: 10px;
     color: #373737;
     text-decoration: underline;
